@@ -47,6 +47,35 @@ Use this as a resource as i document my adventure with restAPI using JS. I will 
 10. Check out the feature branch for more development. 
 #gitflow
 
+## SQL
+
+1. we need to create a database for express to push values to. first we need a conection to sql in app.js add the follwing dont foreget to update your password to the one to connect to your sql
+    //Create connection to SQL
+    const db = mysql.createConnection({
+        host    : 'localhost',
+        user    : 'root',
+        password: 'xxxxx'
+    })
+
+    //Connect
+    db.connect((err) => {
+        if(err){
+            throw err;
+        }
+        console.log('MySql Connected...');
+    });
+2. create a database add the following code after the const app = express(); 
+    //Create DB
+    app.get('/createdb', (req, res) => {
+        let sql = 'CREATE DATABASE nodemysql';
+        db.query(sql, (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            res.send('Database created...');
+        });
+    });
+3. direct your browser to https://localhost:3000/createdb your browser will display the mesage that database was created.
+
 
 
 
